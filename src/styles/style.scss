@@ -1,0 +1,296 @@
+@use 'coder_view';
+
+$light: #f8f6f7;
+$dark: #eed6d6;
+$text: #000303;
+$accent1: #003683;
+$accent2: #e70f1f;
+$accent3: #21ae5e;
+$font: 'Roboto', sans-serif;
+
+body {
+  background: lighten($color: $text, $amount: 10);
+}
+
+h2 {
+  text-align: center;
+  margin: 1rem;
+  color: $light;
+}
+
+* {
+  font-family: $font;
+  margin: unset;
+  padding: unset;
+  letter-spacing: 0.025em;
+  color: $text;
+}
+
+.task-types {
+  background-color: $light;
+  border: solid 0.5rem $dark;
+  width: fit-content;
+  grid-area: task;
+  display: grid;
+
+  button {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    background-color: $accent1;
+    color: $light;
+    border: none;
+    width: fit-content;
+    justify-self: center;
+  }
+}
+
+.create-task {
+  background-color: $dark;
+  border: solid 0.5rem $light;
+  width: fit-content;
+  grid-area: task;
+
+  button {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    background-color: $accent1;
+    color: $light;
+    border: none;
+    width: fit-content;
+    justify-self: center;
+    grid-column: span 2;
+  }
+}
+
+table {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  border: none;
+  border-collapse: collapse;
+  margin: 0.5rem;
+}
+
+th {
+  width: 6rem;
+  padding: 0.5rem;
+  font-weight: 300;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+tr {
+  .name {
+    text-align: right;
+  }
+
+  th,
+  td {
+    text-align: center;
+    padding: 0.5rem;
+  }
+}
+
+td {
+  width: fit-content;
+  border-right: 0.1rem solid $light;
+  height: 1.5rem;
+  .edit {
+    visibility: hidden;
+  }
+}
+
+tr:hover {
+  td .edit {
+    visibility: visible;
+  }
+}
+th:first-child {
+  width: fit-content;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: lighten($color: $accent3, $amount: 50);
+}
+tbody tr:nth-child(even) {
+  background-color: lighten($color: $accent1, $amount: 50);
+}
+
+.mentor-container {
+  display: grid;
+  margin: 1rem;
+  grid-template-columns: auto auto 1fr;
+  grid-template-areas:
+    'tab1 tab2 .'
+    'task task task';
+
+  a {
+    text-decoration: none;
+    font-weight: 500;
+  }
+}
+
+.tab1 {
+  grid-area: tab1;
+  text-align: center;
+  background-color: $dark;
+  width: fit-content;
+  height: fit-content;
+  padding: 0.25em 0.5em;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.tab2 {
+  grid-area: tab2;
+  text-align: left;
+  background-color: $light;
+  width: max-content;
+  height: fit-content;
+  padding: 0.25em 0.5em;
+  cursor: pointer;
+}
+
+.new-task {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  margin: 0.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  row-gap: 0.25rem;
+  column-gap: 0.25rem;
+  align-items: center;
+  justify-content: start;
+
+  label {
+    grid-column: span 2;
+    margin-top: 0.5rem;
+  }
+
+  input {
+    width: fit-content;
+    min-width: 22rem;
+    padding: 0.3em;
+    grid-column: 1;
+  }
+
+  textarea {
+    padding: 0.3em;
+    grid-column: span 2;
+    min-width: 30rem;
+    min-height: 10rem;
+  }
+}
+
+.assign-coders {
+  background-color: $dark;
+  border: solid 0.5rem $light;
+  width: fit-content;
+  grid-area: task;
+  display: grid;
+
+  h4 {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    margin-bottom: 0rem;
+    padding-bottom: 0rem;
+  }
+
+  form {
+    display: grid;
+    width: fit-content;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    justify-self: center;
+    row-gap: 0.25rem;
+
+    div {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      text-align: right;
+      column-gap: 00.25rem;
+      align-items: center;
+    }
+
+    button {
+      margin: 0.5rem;
+      padding: 0.5rem;
+      background-color: $accent1;
+      color: $light;
+      border: none;
+      width: fit-content;
+      justify-self: center;
+    }
+  }
+}
+
+.edit-task {
+  background-color: $dark;
+  border: solid 0.5rem $light;
+  width: fit-content;
+  grid-area: task;
+  display: grid;
+
+  form {
+    display: grid;
+    grid-template-columns: auto auto;
+
+    button {
+      margin: 0.5rem;
+      padding: 0.5rem;
+      background-color: $accent1;
+      color: $light;
+      border: none;
+      width: fit-content;
+      justify-self: center;
+      grid-column: span 2;
+    }
+
+    .details {
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      margin: 0.5rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      row-gap: 0.25rem;
+      column-gap: 0.25rem;
+      align-items: center;
+      justify-content: start;
+
+      label {
+        grid-column: span 2;
+        margin-top: 0.5rem;
+      }
+
+      input {
+        width: fit-content;
+        min-width: 22rem;
+        padding: 0.3em;
+        grid-column: 1;
+      }
+
+      textarea {
+        padding: 0.3em;
+        grid-column: span 2;
+        min-width: 30rem;
+        min-height: 10rem;
+      }
+    }
+
+    .coders {
+      display: grid;
+      width: fit-content;
+      margin: 0.5rem;
+      padding: 0.5rem;
+      justify-self: center;
+      row-gap: 0.25rem;
+
+      div {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        text-align: right;
+        column-gap: 00.25rem;
+        align-items: center;
+      }
+    }
+  }
+}
